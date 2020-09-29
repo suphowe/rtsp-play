@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSMpeg Stream Client</title>
+    <style type="text/css">
+        html, body {
+            background-color: #111;
+            text-align: center;
+        }
+    </style>
+ 
+</head>
+<body>
+   
+   <canvas id="video-canvas" ></canvas>
+    
+    <script src="./lib/jsmpeg.min.js"></script>
+    <script src="./jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+		$(function(){
+			$.ajax({
+				type: "POST",
+				url: "http://192.168.200.112:8085/?rtspUrl=rtsp://onvif:tongli654321@192.168.200.64:554/Streaming/Channels/101?transportmode=unicast%26profile=Profile_1&rtspId=202007281038019624BF67BF48434BBE&rtspWidth=1280&rtspHeight=720",
+				dataType: "text",
+				success: function(data){
+					openVideo(data);
+                }
+			});
+		});
+	
+		function openVideo(url){
+			var canvas = document.getElementById('video-canvas');
+			var player = new JSMpeg.Player(url, {canvas: canvas});
+		}
+    </script>
+</body>
+</html>
